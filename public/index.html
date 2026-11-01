@@ -180,14 +180,18 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .who-sw button{border:0;background:transparent;border-radius:9px;padding:8px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
 .who-sw button .av{width:22px;height:22px;font-size:11px}
 .who-sw button[aria-pressed="true"]{background:var(--surface);box-shadow:var(--shadow);outline:1px solid var(--line)}
-.pday{border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:8px}
-.pday:first-of-type{border-top:0;padding-top:0}
-.pday-h{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.pday-h b{font:700 15px var(--display)}
-.sel-row{display:grid;grid-template-columns:92px 1fr;gap:8px;align-items:center;font-size:13px}
+.pday{border-top:1px solid var(--line);padding-top:4px}
+.pday-h{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:44px}
+.pday-h::after{content:"+"}
+.pday[open] .pday-h::after{content:"–"}
+.pday-h b{font:700 15px var(--display);flex:1}
+.pday-b{display:flex;flex-direction:column;gap:8px;padding-bottom:10px}
+.tsel-row{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.selnote{padding-left:4px}
+.sel-row{display:grid;grid-template-columns:84px minmax(0,1fr);gap:8px;align-items:center;font-size:13px}
 .sel-row .lbl{font-size:10.5px}
-.selx{width:100%;min-width:0;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);padding:0 8px;font-size:13.5px;-webkit-appearance:none;appearance:none;text-overflow:ellipsis}
-.tsel{height:30px;border-radius:999px;padding:0 10px;font-size:12px;font-weight:700;width:auto}
+.selx{width:100%;min-width:0;max-width:100%;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface-2) url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27 viewBox=%270 0 12 12%27%3E%3Cpath d=%27M2 4l4 4 4-4%27 fill=%27none%27 stroke=%27%23888%27 stroke-width=%271.6%27/%3E%3C/svg%3E") no-repeat right 10px center;padding:0 28px 0 10px;font-size:16px;-webkit-appearance:none;appearance:none;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.tsel{font-weight:700}
 .shop h3{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
 .cat{display:flex;flex-direction:column;gap:2px}
 .it{display:grid;grid-template-columns:22px 26px 1fr auto;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line);cursor:pointer;font-size:14px}
@@ -350,6 +354,26 @@ code{font-family:var(--mono);font-size:12.5px;background:var(--surface-2);border
 .eq-from{font-weight:700}
 .eq-to{color:var(--muted)}
 
+/* usabilidad: objetivos táctiles de 44 px, próxima comida, comidas hechas compactas, avisos */
+.toggle,.pill,.seg button,.hseg button,.who-sw button{min-height:44px}
+.hnav button,.wnav button{width:44px;height:44px}
+.x{width:44px;height:44px}
+.del{min-width:44px;min-height:44px}
+.glasses{height:44px}
+.linkbtn{padding:10px 0;min-height:44px}
+.eq summary{min-height:40px;display:flex;align-items:center}
+.strip .nav{flex-basis:32px}
+.meal.now{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset,var(--shadow)}
+.nowtag{display:inline-block;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:1px 8px;letter-spacing:.04em}
+.meal.isdone .dish .chips,.meal.isdone .dish .ing,.meal.isdone .dish .how,.meal.isdone .extra-j,.meal.isdone .linkbtn{display:none}
+.meal.isdone{gap:8px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:50;background:var(--ink);color:var(--bg);border-radius:14px;padding:10px 14px;display:flex;gap:14px;align-items:center;font-weight:600;font-size:14px;max-width:calc(100% - 32px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.toast button{border:0;background:transparent;color:inherit;text-decoration:underline;text-underline-offset:3px;font-weight:800;cursor:pointer;min-height:36px;padding:0 4px}
+.segt{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:6px}
+.segt button{justify-content:center;padding:6px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dish .emo.big{font-size:24px;letter-spacing:3px}
+.dish .dn{align-items:baseline}
+.sel-row .lbl{font-size:10px}
 /* bottom nav */
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);
   padding:8px max(16px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
@@ -367,13 +391,13 @@ code{font-family:var(--mono);font-size:12.5px;background:var(--surface-2);border
 .rules{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .rule{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13.5px}
 .rule b{display:block}
-@media (max-width:420px){.rules{grid-template-columns:1fr}.ring{width:100px;height:100px}.hero .ring{width:116px;height:116px}.sel-row{grid-template-columns:78px 1fr}}
+@media (max-width:420px){.rules{grid-template-columns:1fr}.ring{width:100px;height:100px}.hero .ring{width:116px;height:116px}.sel-row{grid-template-columns:70px minmax(0,1fr)}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <div class="wrap" id="app">
-  <section id="v-login" class="login" hidden></section>
+  <section id="v-login" class="login"><div class="logo" style="width:56px;height:56px;font-size:22px;margin:0 auto">JV</div><p class="muted">Cargando…</p></section>
   <header class="top" id="hdr" hidden>
     <div class="brand"><div class="logo">JV</div><div><h1>JV Food</h1><div class="small muted" id="hdate"></div></div></div>
     <div class="hbtns"><span class="sync" id="sync"></span><button class="pill" id="btn-rules"><span class="i">i</span>Reglas</button><button class="av" id="btn-me" aria-label="Cambiar de usuario"></button></div>
@@ -444,6 +468,7 @@ code{font-family:var(--mono);font-size:12.5px;background:var(--surface-2);border
   </div>
 </div>
 
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script src="app.js"></script>
 </body>
 </html>

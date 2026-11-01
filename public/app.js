@@ -75,32 +75,32 @@ const GW = {pollo:3,pavo:3,ternera:3,cerdo:3,"salmón":3,"pescado blanco":3,gamb
    it: [ingrediente, cantidad Vale, cantidad Jere]. carb: almidón que suma Jere solo en la cena de los días de entreno. */
 const D = {
   // Desayunos
-  b1:{n:"Huevos revueltos con jamón y tomate",s:["des"],it:[["huevo",2,3],["claras",0,100],["jamon",50,60],["queso",20,20],["cherry",150,150]],h:"Revuelto a fuego bajo con una pincelada de ghee o aceite de coco. Los tomates, salteados o crudos al lado."},
-  b2:{n:"Pancakes sirena con frutos rojos",s:["des","mer"],it:[["huevo",1,1],["claras",33,150],["harAlm",10,15],["frutos",100,100],["skyr",100,150],["nueces",15,15]],h:"Batí huevo y claras con la harina de almendra, unas gotas de stevia y vainilla. Sartén pincelada con ghee, fuego bajo y tapado. Frutos rojos arriba (Jere, con skyr)."},
-  b3:{n:"Skyr con manzana y nueces",s:["des","mer"],it:[["skyr",200,300],["manzana",1,1],["nueces",20,20]],h:"Manzana verde en cubos y nueces picadas por arriba. Canela si querés."},
-  b4:{n:"Chía pudding con frutos rojos",s:["des","mer"],it:[["chia",24,24],["leche",200,200],["frutos",80,80],["almendras",15,15],["skyr",0,200]],h:"La noche anterior: chía con la leche, vainilla y unas gotas de stevia; a la heladera mínimo 2 h. Frutos rojos arriba (Jere, con skyr)."},
+  b1:{n:"Huevos revueltos con jamón y tomate",s:["des"],it:[["huevo",2,3],["jamon",50,60],["queso",20,20],["cherry",150,150]],h:"Revuelto a fuego bajo con una pincelada de ghee o aceite de coco. Los tomates, salteados o crudos al lado."},
+  b2:{n:"Pancakes sirena con frutos rojos",s:["des","mer"],it:[["huevo",1,1],["claras",33,100],["harAlm",10,15],["frutos",100,100],["skyr",100,100],["nueces",15,15]],h:"Batí huevo y claras con la harina de almendra, unas gotas de stevia y vainilla. Sartén pincelada con ghee, fuego bajo y tapado. Frutos rojos arriba (Jere, con skyr)."},
+  b3:{n:"Skyr con manzana y nueces",s:["des","mer"],it:[["skyr",200,250],["manzana",1,1],["nueces",20,20]],h:"Manzana verde en cubos y nueces picadas por arriba. Canela si querés."},
+  b4:{n:"Chía pudding con frutos rojos",s:["des","mer"],it:[["chia",24,24],["leche",200,200],["frutos",80,80],["almendras",15,15],["skyr",0,150]],h:"La noche anterior: chía con la leche, vainilla y unas gotas de stevia; a la heladera mínimo 2 h. Frutos rojos arriba (Jere, con skyr)."},
   b5:{n:"Pan sirenil con jamón y queso",s:["des"],it:[["lino",24,24],["huevo",1,2],["jamon",40,60],["queso",20,20],["cherry",100,100]],h:"Mezclá lino o chía molidos con el huevo y una pizca de sal. 2 min al microondas al 70 % en un bol pincelado con ghee. Abrilo y rellená."},
-  b6:{n:"Revuelto con salmón ahumado y aguacate",s:["des"],it:[["huevo",2,3],["claras",0,100],["salmonA",40,60],["aguacate",40,40]],h:"Revuelto a fuego bajo. El salmón y el aguacate van al final, en frío."},
+  b6:{n:"Revuelto con salmón ahumado y aguacate",s:["des"],it:[["huevo",2,3],["salmonA",40,60],["aguacate",40,40]],h:"Revuelto a fuego bajo. El salmón y el aguacate van al final, en frío."},
   // Meriendas
-  m1:{n:"Cottage con frutos rojos y almendras",s:["mer"],it:[["cottage",200,250],["frutos",100,100],["almendras",15,15]],h:"Todo en un bowl. Las almendras, mejor tostadas."},
-  m2:{n:"Atún con aguacate y tomate",s:["mer"],it:[["atun",1,2],["aguacate",70,50],["cherry",100,150]],h:"Aguacate pisado con limón y pimienta, atún escurrido y tomates."},
-  m3:{n:"Skyr con kiwi y crunchi",s:["mer","des"],it:[["skyr",200,250],["kiwi",1,1],["almendras",10,10],["lino",5,5]],h:"Crunchi: almendras picadas y semillas tostadas en sartén con una cucharadita de aceite de coco; se guarda en frasco."},
-  m4:{n:"Pera con jamón y queso feta",s:["mer"],it:[["pera",1,1],["jamon",50,80],["feta",30,20],["skyr",0,150]],h:"Pera en láminas con el jamón y el feta desmenuzado. Jere suma un skyr."},
+  m1:{n:"Cottage con frutos rojos y almendras",s:["mer"],it:[["cottage",200,220],["frutos",100,100],["almendras",15,15]],h:"Todo en un bowl. Las almendras, mejor tostadas."},
+  m2:{n:"Atún con aguacate y tomate",s:["mer"],it:[["atun",1,1],["aguacate",70,50],["cherry",100,150]],h:"Aguacate pisado con limón y pimienta, atún escurrido y tomates."},
+  m3:{n:"Skyr con kiwi y crunchi",s:["mer","des"],it:[["skyr",200,220],["kiwi",1,1],["almendras",10,10],["lino",5,5]],h:"Crunchi: almendras picadas y semillas tostadas en sartén con una cucharadita de aceite de coco; se guarda en frasco."},
+  m4:{n:"Pera con jamón y queso feta",s:["mer"],it:[["pera",1,1],["jamon",50,60],["feta",30,20],["skyr",0,120]],h:"Pera en láminas con el jamón y el feta desmenuzado. Jere suma un skyr."},
   // Comidas
-  l1:{n:"Cerdo salteado con zanahoria y cebolla",s:["com"],it:[["lomo",170,200],["zanahoria",100,120],["cebolla",80,80]],h:"Lomo en tiras, salteado en sartén bien caliente con ajo, la zanahoria en bastones y la cebolla. 12 min."},
-  l2:{n:"Pollo al horno con verduras asadas",s:["com"],it:[["pollo",170,220],["verd",250,300]],h:"Pollo y verduras en la misma bandeja, 200 °C, 25-30 min. Sale del batch."},
-  l3:{n:"Hamburguesas caseras con ensalada",s:["com"],it:[["ternera",160,200],["ens",200,250],["cebolla",30,30]],h:"Carne con ajo, perejil y sal; plancha 4 min por lado. Sin pan."},
-  l4:{n:"Pavo con champiñones y espárragos",s:["com"],it:[["pavo",170,220],["champi",150,150],["esparr",150,150],["aguacate",40,0]],h:"Pavo a la plancha; champiñones y espárragos salteados con ajo."},
+  l1:{n:"Cerdo salteado con zanahoria y cebolla",s:["com"],it:[["lomo",170,180],["zanahoria",100,120],["cebolla",80,80]],h:"Lomo en tiras, salteado en sartén bien caliente con ajo, la zanahoria en bastones y la cebolla. 12 min."},
+  l2:{n:"Pollo al horno con verduras asadas",s:["com"],it:[["pollo",170,190],["verd",250,300]],h:"Pollo y verduras en la misma bandeja, 200 °C, 25-30 min. Sale del batch."},
+  l3:{n:"Hamburguesas caseras con ensalada",s:["com"],it:[["ternera",160,180],["ens",200,250],["cebolla",30,30]],h:"Carne con ajo, perejil y sal; plancha 4 min por lado. Sin pan."},
+  l4:{n:"Pavo con champiñones y espárragos",s:["com"],it:[["pavo",170,190],["champi",150,150],["esparr",150,150],["aguacate",40,0]],h:"Pavo a la plancha; champiñones y espárragos salteados con ajo."},
   l5:{n:"Ensalada completa de atún, huevo y aceitunas",s:["com"],it:[["atun",1,2],["huevo",1,1],["ens",250,250],["cherry",100,100],["aceitunas",6,4],["aguacate",40,0]],h:"Con aceitunas, sin agregar aceite. Vinagre de manzana o limón."},
-  l6:{n:"Pollo al curry con verduras",s:["com"],it:[["contra",170,220],["wok",250,300],["coco",50,60]],h:"Sartén grande: pollo, verdura, leche de coco y curry. 15 min."},
-  l7:{n:"Albóndigas en salsa de tomate con calabacín",s:["com"],it:[["ternera",160,200],["tomTri",150,150],["calabacin",200,250]],h:"Albóndigas al horno 15 min y después 10 min en la salsa. Calabacín en tiras salteado."},
+  l6:{n:"Pollo al curry con verduras",s:["com"],it:[["contra",170,190],["wok",250,300],["coco",50,60]],h:"Sartén grande: pollo, verdura, leche de coco y curry. 15 min."},
+  l7:{n:"Albóndigas en salsa de tomate con calabacín",s:["com"],it:[["ternera",160,180],["tomTri",150,150],["calabacin",200,250]],h:"Albóndigas al horno 15 min y después 10 min en la salsa. Calabacín en tiras salteado."},
   // Cenas
-  d1:{n:"Ternera con calabacín y tomates cherry",s:["cen"],it:[["filete",170,200],["calabacin",200,200],["cherry",100,100]],carb:["patata",300],h:"Filete a la plancha; calabacín y cherry salteados."},
+  d1:{n:"Ternera con calabacín y tomates cherry",s:["cen"],it:[["filete",170,180],["calabacin",200,200],["cherry",100,100]],carb:["patata",300],h:"Filete a la plancha; calabacín y cherry salteados."},
   d2:{n:"Salmón al horno con brócoli",s:["cen"],it:[["salmon",170,180],["brocoli",250,250]],carb:["arroz",70],h:"Horno a 200 °C, 12-15 min, todo en la misma bandeja."},
-  d3:{n:"Merluza al horno con verduras",s:["cen"],it:[["merluza",200,250],["verd",250,250],["aceitunas",5,0]],carb:["boniato",250],h:"Pescado sobre la verdura, 200 °C, 15 min."},
-  d4:{n:"Gambas al ajillo con espárragos y champiñones",s:["cen"],it:[["gambas",200,250],["esparr",150,150],["champi",100,100],["aguacate",40,0]],carb:["arroz",70],h:"Sartén bien caliente con ajo y guindilla, 6-8 min."},
-  d5:{n:"Pollo con puré de coliflor",s:["cen"],it:[["pollo",170,220],["coliflor",300,300]],carb:["patata",300],h:"Coliflor hervida y pisada con una pizca de nuez moscada. Jere mezcla la patata en su parte del puré."},
-  d6:{n:"Pavo con verduras salteadas",s:["cen"],it:[["pavo",170,220],["wok",250,250]],carb:["quinoa",70],h:"Pavo en tiras salteado con la verdura y salsa de soja sin azúcar."}
+  d3:{n:"Merluza al horno con verduras",s:["cen"],it:[["merluza",200,220],["verd",250,250],["aceitunas",5,0]],carb:["boniato",250],h:"Pescado sobre la verdura, 200 °C, 15 min."},
+  d4:{n:"Gambas al ajillo con espárragos y champiñones",s:["cen"],it:[["gambas",200,220],["esparr",150,150],["champi",100,100],["aguacate",40,0]],carb:["arroz",70],h:"Sartén bien caliente con ajo y guindilla, 6-8 min."},
+  d5:{n:"Pollo con puré de coliflor",s:["cen"],it:[["pollo",170,190],["coliflor",300,300]],carb:["patata",300],h:"Coliflor hervida y pisada con una pizca de nuez moscada. Jere mezcla la patata en su parte del puré."},
+  d6:{n:"Pavo con verduras salteadas",s:["cen"],it:[["pavo",170,190],["wok",250,250]],carb:["quinoa",70],h:"Pavo en tiras salteado con la verdura y salsa de soja sin azúcar."}
 };
 const SLOTS = ["des", "com", "mer", "cen"];
 const LIST = Object.fromEntries(SLOTS.map(s => [s, Object.keys(D).filter(id => D[id].s.includes(s))]));
@@ -113,9 +113,9 @@ const MEALS = {
 const U = {
   jere: {
     name: "Jere", oil: 20, types: {
-      calis: { lab: "Calistenia", dot: "t-calis", k: 1850, p: 170, c: 110, f: 70, water: 12, train: true, note: "Calistenia a la tarde: la merienda es tu pre-entreno y la cena, con almidón, el post." },
-      fit: { lab: "Fitboxing", dot: "t-fit", k: 1900, p: 170, c: 110, f: 75, water: 14, train: true, note: "Fitboxing: merienda con fruta 1-2 h antes y almidón en la cena. Agua con una pizca de sal; meta de 3,5 L." },
-      rest: { lab: "Descanso", dot: "t-rest", k: 1550, p: 170, c: 60, f: 65, water: 12, train: false, note: "Descanso: mismos platos que Vale, sin almidón en la cena. 10.000 pasos." }
+      calis: { lab: "Calistenia", dot: "t-calis", k: 1750, p: 145, c: 110, f: 70, water: 12, train: true, note: "Calistenia a la tarde: la merienda es tu pre-entreno y la cena, con almidón, el post." },
+      fit: { lab: "Fitboxing", dot: "t-fit", k: 1800, p: 145, c: 110, f: 75, water: 14, train: true, note: "Fitboxing: merienda con fruta 1-2 h antes y almidón en la cena. Agua con una pizca de sal; meta de 3,5 L." },
+      rest: { lab: "Descanso", dot: "t-rest", k: 1500, p: 145, c: 60, f: 65, water: 12, train: false, note: "Descanso: mismos platos que Vale, sin almidón en la cena. 10.000 pasos." }
     },
     sched: ["calis", "fit", "rest", "calis", "fit", "rest", "rest"],
     start: 104.2, goal: 85.6, h: 176, age: 30, male: true, ffm: 68.5, goalTxt: "85,6 kg · 20 % de grasa"
@@ -226,7 +226,7 @@ function dayNote(u, date) {
   if (u === "jere" && k === 5) n += " Comida libre: una comida a elección, sin compensar.";
   return n;
 }
-function premio(date) {
+function premio(date) { // dulce planificado del día (Jere)
   const k = wd(pd(date)), t = typeKey("jere", date);
   if (k === 5) return "hfree";
   if (t === "calis") return "merc";
@@ -364,8 +364,8 @@ function renderHoy() {
   $("#v-hoy").innerHTML = `
    ${strip(dayIdx, "day", u)}
    <div class="card">
-     <div class="dayinfo"><h2>${DFULL[k]} ${dObj.getDate()}</h2><span class="small muted">${U[o].name}: ${typeOf(o, date).lab.toLowerCase()}</span></div>
-     <div><div class="seg">${seg}</div>${changed ? `<div class="chg" style="margin-top:6px">Cambiado: era ${cfg.types[defType(u, date)].lab.toLowerCase()}. Las comidas ya se ajustaron.</div>` : ""}</div>
+     <div class="dayinfo"><h2>${DFULL[k]} ${dObj.getDate()}</h2>${date !== TODS ? `<button class="pill" data-today="1">↩ Ir a hoy</button>` : `<span class="small muted">${U[o].name}: ${typeOf(o, date).lab.toLowerCase()}</span>`}</div>
+     <div><div class="seg segt" style="--n:${Object.keys(cfg.types).length}">${seg}</div>${changed ? `<div class="chg" style="margin-top:6px">Cambiado: era ${cfg.types[defType(u, date)].lab.toLowerCase()}. Las comidas ya se ajustaron.</div>` : ""}</div>
      <div class="sum">${ringHTML}<div class="macros">${macroHTML}</div></div>
      ${circHTML}
      ${eggs > 2 ? `<p class="warnchip">Hoy suman ${eggs} huevos; Sirenas sugiere 2 por día. Cambiá algún plato.</p>` : ""}
@@ -379,7 +379,8 @@ function renderHoy() {
 }
 function mealCard(u, o, date, mi) {
   const [lab, hora] = MEALS[u][mi], done = isDone(u, date, mi), lg = logOf(u, date, mi);
-  const head = `<div class="mh"><div><div class="lbl">${hora} h${u === "jere" && mi === 2 && isTrain(u, date) ? " · pre-entreno" : ""}</div><h3>${lab}</h3></div>
+  const next = date === TODS && [0, 1, 2, 3].find(x => !isDone(u, date, x)) === mi;
+  const head = `<div class="mh"><div><div class="lbl">${next ? `<span class="nowtag">Próxima</span> ` : ""}${hora} h${u === "jere" && mi === 2 && isTrain(u, date) ? " · pre-entreno" : ""}</div><h3>${lab}</h3></div>
     ${lg ? "" : `<button class="toggle" data-done="${mi}" aria-pressed="${done}">${done ? "✓ Hecho" : "Marcar hecho"}</button>`}</div>`;
   if (lg) {
     return `<div class="card meal"><div class="mh"><div><div class="lbl">${hora} h</div><h3>${lab}</h3></div><span class="toggle" aria-hidden="true">✓ Registrado</span></div>
@@ -408,8 +409,8 @@ function mealCard(u, o, date, mi) {
     const sel = x === id, pm = macros(portion(x, u, date, mi));
     return `<button class="opt mini${sel ? " sel" : ""}" id="o-${mi}-${x}" data-mi="${mi}" data-id="${x}" aria-pressed="${sel}"><span class="row"><span class="emo">${emos(portion(x, u, date, mi))}</span><span class="nm">${D[x].n}</span><span class="kc">${pm.k}</span></span></button>`;
   }).join("");
-  return `<div class="card meal${done ? " isdone" : ""}">${head}
-    <div class="dish"><div class="dn"><span class="emo">${emos(mine)}</span><b>${dish.n}</b><span class="kc mono small muted">${mm.k} kcal</span></div>
+  return `<div class="card meal${done ? " isdone" : ""}${next ? " now" : ""}" id="meal-${mi}">${head}
+    <div class="dish"><span class="emo big">${emos(mine)}</span><div class="dn"><b>${dish.n}</b><span class="kc mono small muted">${mm.k} kcal</span></div>
       <span class="chips"><span class="chip p">P ${mm.p}</span><span class="chip c">C ${mm.c}</span><span class="chip f">G ${mm.f}</span></span>
       <span class="ing"><b>Tu porción:</b> ${mine.map(ingTxt).join(" · ")}</span>${carbX}
       <span class="how">${dish.h}</span></div>
@@ -425,15 +426,15 @@ function sweetCard(date, t, tot, done) {
   const sw = premio(date), eaten = get("jere", "dulce", date);
   if (!sw) {
     let nx = null; for (let n = 1; n <= 7 && !nx; n++) { const d = ds(addD(pd(date), n)); if (premio(d)) nx = d; }
-    return `<div class="card sweet"><div class="sw-main"><div class="lock">😴</div><div><div class="lbl" style="color:var(--sweet)">Premio de hoy</div><div class="sw-n">Hoy no hay premio</div><p class="small muted">Día de descanso.${nx ? ` El próximo premio es el ${DFULL[wd(pd(nx))].toLowerCase()}.` : ""}</p></div></div></div>`;
+    return `<div class="card sweet"><div class="sw-main"><div class="lock">🍓</div><div><div class="lbl" style="color:var(--sweet)">Dulce del día</div><div class="sw-n">Hoy no hay dulce planificado</div><p class="small muted">${nx ? `El próximo es el ${DFULL[wd(pd(nx))].toLowerCase()}.` : ""} Si te tienta algo, registralo en "Fuera del plan".</p></div></div></div>`;
   }
   const s = SW[sw], margin = t.k - tot.k, needM = s.k > 0, mOk = !needM || margin >= s.k || eaten, mealsOk = done === 4, open = mOk && mealsOk;
   const cond = (ok, txt) => `<div class="cond${ok ? " ok" : ""}"><span class="ck">${ok ? "✓" : ""}</span><span>${txt}</span></div>`;
-  if (open) return `<div class="card sweet open"><div class="sw-main"><div class="lock">${s.e}</div><div><div class="lbl" style="color:var(--sweet)">🔓 Premio desbloqueado</div><div class="sw-n">${s.n}</div></div></div>
-    <p class="small">${s.d}</p>${needM && !eaten ? `<p class="small muted mono">~${s.k} kcal · te quedan ${margin} kcal de margen</p>` : ""}
-    <button class="toggle" id="eat" aria-pressed="${!!eaten}">${eaten ? "✓ Me lo comí" : "Me lo comí"}</button></div>`;
-  return `<div class="card sweet"><div class="sw-main"><div class="lock">🔒</div><div><div class="lbl" style="color:var(--sweet)">Premio de hoy</div><div class="sw-n blur" aria-hidden="true">Premio sorpresa</div></div></div>
-    <div class="conds">${cond(mealsOk, `Completá las 4 comidas (${done}/4)`)}${needM ? cond(mOk, mOk ? `Tenés margen de calorías (${margin} kcal)` : `Falta margen: elegí platos más livianos (tenés ${Math.max(0, margin)} kcal)`) : ""}</div></div>`;
+  if (open) return `<div class="card sweet open"><div class="sw-main"><div class="lock">${s.e}</div><div><div class="lbl" style="color:var(--sweet)">Dulce del día · entra hoy</div><div class="sw-n">${s.n}</div></div></div>
+    <p class="small">${s.d}</p>${needM && !eaten ? `<p class="small muted mono">~${s.k} kcal · te quedan ${margin} kcal en el día</p>` : ""}
+    <button class="toggle" id="eat" aria-pressed="${!!eaten}">${eaten ? "✓ Lo comí" : "Lo comí"}</button></div>`;
+  return `<div class="card sweet"><div class="sw-main"><div class="lock">🍓</div><div><div class="lbl" style="color:var(--sweet)">Dulce del día</div><div class="sw-n">Hay lugar para algo dulce</div><p class="small muted">Lo vas a ver cuando el día lo permita:</p></div></div>
+    <div class="conds">${cond(mealsOk, `Las 4 comidas hechas (${done}/4)`)}${needM ? cond(mOk, mOk ? `Margen de calorías (${margin} kcal)` : `Margen de calorías: te quedan ${Math.max(0, margin)} kcal, hacen falta ~${s.k}`) : ""}</div></div>`;
 }
 function pick(u, date, mi, id, mode) {
   if (mode === "both") { put("shared", "menu", date + ":" + mi, id); for (const x of ["jere", "vale"]) if (get(x, "sel2", date + ":" + mi)) put(x, "sel2", date + ":" + mi, null); }
@@ -443,6 +444,7 @@ $("#v-hoy").addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
   const u = ME, date = curDate();
   if (b.dataset.day !== undefined) { dayIdx = +b.dataset.day; renderHoy(); }
+  else if (b.dataset.today) { weekStart = sunday(TODAY); dayIdx = TODAY.getDay(); renderHoy(); }
   else if (b.dataset.wk) { weekStart = addD(weekStart, 7 * b.dataset.wk); renderHoy(); }
   else if (b.dataset.type) { put(u, "tipo", date, b.dataset.type === defType(u, date) ? null : b.dataset.type); renderHoy(); }
   else if (b.dataset.g !== undefined) { const g = +b.dataset.g + 1, cur = get(u, "agua", date) || 0; put(u, "agua", date, cur === g ? g - 1 : g); renderHoy(); }
@@ -453,7 +455,7 @@ $("#v-hoy").addEventListener("click", e => {
   else if (b.dataset.same !== undefined) { pick(u, date, +b.dataset.same, b.dataset.sid, "both"); renderHoy(); }
   else if (b.dataset.log !== undefined) openLog(u, date, +b.dataset.log);
   else if (b.dataset.addx) openLog(u, date, "x");
-  else if (b.dataset.delx !== undefined) { const ex = extrasOf(u, date).slice(); ex.splice(+b.dataset.delx, 1); put(u, "extra", date, ex.length ? ex : null); renderHoy(); }
+  else if (b.dataset.delx !== undefined) { const prev = extrasOf(u, date).slice(), ex = prev.slice(), [gone] = ex.splice(+b.dataset.delx, 1); put(u, "extra", date, ex.length ? ex : null); renderHoy(); toast(`Borraste "${gone.n}"`, () => { put(u, "extra", date, prev); renderHoy(); }); }
   else if (b.id === "eat") { put("jere", "dulce", date, get("jere", "dulce", date) ? null : premio(date)); renderHoy(); }
 });
 
@@ -503,9 +505,11 @@ function renderSem() {
       const sh = get("shared", "menu", d + ":" + mi), cur = LIST[SLOTS[mi]].includes(sh) ? sh : defChoice(d, mi);
       const oj = get("jere", "sel2", d + ":" + mi), ov = get("vale", "sel2", d + ":" + mi);
       const note = [oj && oj !== cur ? `Jere: ${D[oj]?.n || ""}` : "", ov && ov !== cur ? `Vale: ${D[ov]?.n || ""}` : ""].filter(Boolean).join(" · ");
-      return `<label class="sel-row"><span class="lbl">${MEALS.jere[mi][0]}</span><select class="selx" id="m-${i}-${mi}" data-mdate="${d}" data-mi="${mi}">${LIST[SLOTS[mi]].map(id => `<option value="${id}"${id === cur ? " selected" : ""}>${emos(D[id].it.map(x => [x[0], 1]))} ${esc(D[id].n)}</option>`).join("")}</select></label>${note ? `<span class="small muted" style="padding-left:100px">${esc(note)}</span>` : ""}`;
+      return `<label class="sel-row"><span class="lbl">${MEALS.jere[mi][0]}</span><select class="selx" id="m-${i}-${mi}" data-mdate="${d}" data-mi="${mi}">${LIST[SLOTS[mi]].map(id => `<option value="${id}"${id === cur ? " selected" : ""}>${esc(D[id].n)}</option>`).join("")}</select></label>${note ? `<span class="small muted selnote">${esc(note)}</span>` : ""}`;
     }).join("");
-    return `<div class="pday"><div class="pday-h"><b>${DFULL[k]} ${dO.getDate()}${d === TODS ? " · hoy" : ""}</b><span style="display:flex;gap:4px">${tsel("jere")}${tsel("vale")}</span></div>${rows}</div>`;
+    const past = d < TODS;
+    return `<details class="pday"${past ? "" : " open"}><summary class="pday-h"><b>${DFULL[k]} ${dO.getDate()}${d === TODS ? " · hoy" : ""}</b><span class="small muted">${[0, 1, 2, 3].map(mi => emos(D[choice("jere", d, mi)].it.map(x => [x[0], 1])).slice(0, 2)).join(" ")}</span></summary>
+      <div class="pday-b"><div class="tsel-row">${tsel("jere")}${tsel("vale")}</div>${rows}</div></details>`;
   }).join("");
   $("#v-sem").innerHTML = `
    <div class="wnav"><button data-wk="-1" aria-label="Semana anterior">‹</button><div style="text-align:center"><div class="lbl">Semana</div><h2>${weekStart.getDate()} ${MES[weekStart.getMonth()]} – ${e.getDate()} ${MES[e.getMonth()]}</h2></div><button data-wk="1" aria-label="Semana siguiente">›</button></div>
@@ -770,12 +774,12 @@ $("#v-pro").addEventListener("submit", e => {
     const r1 = v => Math.round(v * 10) / 10;
     put(ME, "comp", d, { pct: r1(pct), fm: r1(fm), ffm: r1(ffm) });
   }
-  put(ME, "peso", d, kg); renderPro();
+  put(ME, "peso", d, kg); renderPro(); toast("Peso guardado");
 });
 $("#v-pro").addEventListener("click", e => {
   const b = e.target.closest("button, [data-hday]"); if (!b) return;
-  if (b.dataset.del) { put(ME, "peso", b.dataset.del, null); put(ME, "comp", b.dataset.del, null); renderPro(); }
-  else if (b.dataset.delc) { put(ME, "comp", b.dataset.delc, null); renderPro(); }
+  if (b.dataset.del) { const d = b.dataset.del, kg = get(ME, "peso", d), c = get(ME, "comp", d); put(ME, "peso", d, null); put(ME, "comp", d, null); renderPro(); toast("Borraste el peso", () => { put(ME, "peso", d, kg); if (c) put(ME, "comp", d, c); renderPro(); }); }
+  else if (b.dataset.delc) { const d = b.dataset.delc, c = get(ME, "comp", d); put(ME, "comp", d, null); renderPro(); toast("Borraste la medición", () => { put(ME, "comp", d, c); renderPro(); }); }
   else if (b.dataset.hv) { hView = b.dataset.hv; renderHist(); }
   else if (b.dataset.hu) { hUser = b.dataset.hu; renderHist(); }
   else if (b.dataset.hm) { hMetric = b.dataset.hm; renderHist(); }
@@ -868,9 +872,9 @@ $("#log-save").addEventListener("click", () => {
   const rec = { n, p, c, f, a: Math.round(LG.a || 0), k: kcalOf({ p, c, f, a: LG.a || 0 }), txt: $("#log-txt").value.trim().slice(0, 300), sweet: $("#log-sweet").checked, items: (LG.items || []).slice(0, 12) };
   if (LG.mi === "x") put(LG.u, "extra", LG.date, [...extrasOf(LG.u, LG.date), rec]);
   else put(LG.u, "log", LG.date + ":" + LG.mi, rec);
-  closeM(); render();
+  closeM(); render(); toast("Guardado");
 });
-$("#log-del").addEventListener("click", () => { if (LG.mi !== "x") put(LG.u, "log", LG.date + ":" + LG.mi, null); closeM(); render(); });
+$("#log-del").addEventListener("click", () => { const { u, date, mi } = LG, prev = mi !== "x" ? logOf(u, date, mi) : null; if (mi !== "x") put(u, "log", date + ":" + mi, null); closeM(); render(); if (prev) toast("Volviste al plato del plan", () => { put(u, "log", date + ":" + mi, prev); render(); }); });
 
 /* =================== Reglas =================== */
 function rulesHTML() {
@@ -887,14 +891,23 @@ function rulesHTML() {
       <div class="rule"><b>Pescado</b>Al menos 2-3 veces por semana.</div></div>
     <p class="small muted">Resumen de la guía de Proyecto Sirenas. Ante cualquier duda manda la nutricionista. Las calorías que muestra la app son estimaciones; Sirenas no cuenta calorías.</p>`;
   return `<div class="rules">
-      <div class="rule"><b>Mismos platos que Vale</b>Con más proteína en tu porción.</div>
-      <div class="rule"><b>≈40 g de proteína por comida</b>Es lo único que no se negocia.</div>
+      <div class="rule"><b>Mismos platos que Vale</b>Con una porción más grande.</div>
+      <div class="rule"><b>145 g de proteína por día</b>Unos 35-40 g en cada comida. Mínimo 130 g.</div>
       <div class="rule"><b>Almidón solo en la cena</b>Los días de entreno: patata, boniato, arroz o quinoa.</div>
       <div class="rule"><b>Fruta</b>En desayuno y merienda, como Vale. Antes de entrenar te da energía.</div>
       <div class="rule"><b>3 L de agua</b>3,5 L los días de Fitboxing, con una pizca de sal.</div>
       <div class="rule"><b>Una comida libre</b>El sábado, sin compensar después.</div></div>
     <h3>¿El carbohidrato sirve solo después de entrenar?</h3>
     <p class="small">No solo, pero es donde mejor encaja. Para bajar grasa lo que más pesa es el total de calorías y la proteína; el momento importa poco. Como entrenás a la tarde, la cena con almidón te sirve para recuperar. Si en el Fitboxing te falta nafta, la fruta de la merienda es la que ayuda.</p>`;
+}
+
+/* =================== Avisos =================== */
+let toastT = null;
+function toast(msg, undo) {
+  const el = $("#toast"); clearTimeout(toastT);
+  el.innerHTML = `<span>${esc(msg)}</span>${undo ? `<button id="toast-undo">Deshacer</button>` : ""}`; el.hidden = false;
+  if (undo) $("#toast-undo").onclick = () => { el.hidden = true; undo(); };
+  toastT = setTimeout(() => { el.hidden = true; }, undo ? 6000 : 2200);
 }
 
 /* =================== Modales y navegación =================== */
