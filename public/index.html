@@ -233,6 +233,67 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .cbar{display:flex;height:34px;border-radius:10px;overflow:hidden;gap:2px}
 .cbar i{display:flex;align-items:center;justify-content:center;font:700 12.5px var(--mono);color:#fff;min-width:56px}
 .cbar .cf{background:var(--fat)} .cbar .cm{background:var(--accent);color:var(--accent-ink)}
+/* registro de comidas */
+.logbtns{display:flex;gap:8px;flex-wrap:wrap}
+.logbtns .btn{flex:1;min-width:130px;display:inline-flex;align-items:center;justify-content:center}
+.filebtn{cursor:pointer}
+.logprev img{max-height:140px;border-radius:12px;display:block}
+.wform4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.kout{height:46px;display:flex;align-items:center;font-weight:700;font-size:16px}
+.logitems{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)}
+.chk{display:flex;gap:8px;align-items:center;font-size:14px;font-weight:600}
+.chk input{width:18px;height:18px;accent-color:var(--accent)}
+.commons{display:flex;flex-wrap:wrap;gap:6px}
+.commons button{border:1px solid var(--line);background:var(--surface-2);border-radius:999px;padding:6px 10px;font-size:12.5px;cursor:pointer}
+.logged{border:1.5px dashed var(--carb);border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:6px;background:color-mix(in srgb,var(--carb) 8%,transparent)}
+.logged .lt{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.linkbtn{border:0;background:transparent;color:var(--accent);font-weight:700;font-size:13px;cursor:pointer;padding:2px 0;text-align:left}
+.extras{display:flex;flex-direction:column;gap:6px}
+.xrow{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:14px;border-bottom:1px solid var(--line);padding:6px 0}
+/* círculo */
+.circ{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.circ.c4{grid-template-columns:repeat(4,1fr)}
+.cb{border:1px solid var(--line);background:var(--surface-2);border-radius:14px;padding:8px 2px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;font-size:11px;font-weight:700;color:var(--muted);min-width:0;text-align:center}
+.cb .ci{font-size:20px;line-height:1;filter:grayscale(1);opacity:.55}
+.cb.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.cb.on .ci{filter:none;opacity:1}
+.cb.auto{cursor:default}
+.warnchip{font-size:12.5px;font-weight:700;color:var(--warn)}
+.dish{display:flex;flex-direction:column;gap:6px}
+.dish .dn{display:flex;gap:10px;align-items:center}
+.dish .dn b{font-size:16px;flex:1;min-width:0}
+.extra-j{font-size:13px;font-weight:700;color:var(--carb)}
+.portions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+/* historial */
+.hseg{display:flex;gap:4px;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:4px}
+.hseg button{flex:1;border:0;background:transparent;border-radius:9px;padding:7px 4px;font-weight:700;font-size:13px;cursor:pointer;color:var(--muted)}
+.hseg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow);outline:1px solid var(--line)}
+.hnav{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.hnav button{border:1px solid var(--line);background:var(--surface);border-radius:10px;width:34px;height:34px;cursor:pointer;font-size:16px}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal .hd{font-size:10.5px;font-weight:700;color:var(--muted);text-align:center}
+.cell{aspect-ratio:1/1.15;max-width:100%;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);padding:3px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;min-width:0;position:relative;overflow:hidden}
+.cell .cd{font:700 11px var(--mono);color:var(--ink);position:relative}
+.cell .ic{display:flex;gap:1px;flex-wrap:wrap;font-size:10px;line-height:1;position:relative}
+.cell .fill{position:absolute;left:0;right:0;bottom:0;background:var(--accent);opacity:.22}
+.cell.out{opacity:.35}
+.cell.today{outline:2px solid var(--ink);outline-offset:-1px}
+.cell.fut{background:transparent;cursor:default}
+.tdot{width:7px;height:7px;border-radius:50%;display:inline-block}
+.heat{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,1fr);gap:2px;overflow-x:auto;padding-bottom:4px}
+.heat i{width:11px;height:11px;border-radius:2px;background:var(--line);display:block;cursor:pointer}
+.wtab{width:100%;border-collapse:collapse;font-size:13px}
+.wtab td,.wtab th{padding:7px 3px;border-bottom:1px solid var(--line);text-align:center}
+.wtab td:first-child,.wtab th:first-child{text-align:left}
+.wtab tr{cursor:pointer}
+.minibar{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:3px}
+.minibar i{display:block;height:100%;background:var(--accent)}
+.hlegend{display:flex;gap:10px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);align-items:center}
+.scale{display:inline-flex;gap:2px;vertical-align:middle}
+.scale i{width:11px;height:11px;border-radius:2px;display:inline-block}
+.hstats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.dd-row{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}
+.dd-row span:last-child{text-align:right}
 /* progreso */
 .hero{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
 .hero .ring{width:132px;height:132px}
@@ -345,32 +406,41 @@ code{font-family:var(--mono);font-size:12.5px;background:var(--surface-2);border
   </div>
 </div>
 
-<div class="ov" id="m-health" hidden>
-  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="health-t">
-    <div class="sh"><h2 id="health-t">Importar de Salud</h2><button class="x" data-close aria-label="Cerrar">✕</button></div>
-    <p class="small muted">Corré tu Atajo "JV Food Salud", volvé acá y tocá Pegar. También podés cargar los datos a mano.</p>
-    <button class="btn ghost" id="h-paste">📋 Pegar del portapapeles</button>
-    <textarea class="inp" id="h-raw" placeholder="JSFOOD;9876;540;45"></textarea>
-    <div class="wform">
-      <label class="fld"><span class="lbl">Fecha</span><input class="inp" type="date" id="h-date"></label>
-      <label class="fld"><span class="lbl">Pasos</span><input class="inp mono" type="number" id="h-steps" inputmode="numeric"></label>
-      <label class="fld"><span class="lbl">Kcal activas</span><input class="inp mono" type="number" id="h-kcal" inputmode="numeric"></label>
-      <label class="fld"><span class="lbl">Min. ejercicio</span><input class="inp mono" type="number" id="h-min" inputmode="numeric"></label>
-      <button class="btn" id="h-save">Guardar</button>
+<div class="ov" id="m-log" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="log-t">
+    <div class="sh"><h2 id="log-t">Comí otra cosa</h2><button class="x" data-close aria-label="Cerrar">✕</button></div>
+    <p class="small muted" id="log-sub"></p>
+    <label class="fld"><span class="lbl">¿Qué comiste?</span><textarea class="inp" id="log-txt" placeholder="Ej: 2 porciones de pizza de jamón y una cerveza" maxlength="600"></textarea></label>
+    <div class="logbtns">
+      <label class="btn ghost filebtn" for="log-img">📷 Foto del plato</label>
+      <input type="file" id="log-img" accept="image/*" hidden>
+      <button class="btn" id="log-ai">✨ Estimar</button>
     </div>
-    <p class="small muted" id="h-msg"></p>
-    <details>
-      <summary>Cómo armar el Atajo (una sola vez)</summary>
-      <ol class="steps">
-        <li>Abrí <b>Atajos</b> en el iPhone y creá uno nuevo llamado <b>JV Food Salud</b>.</li>
-        <li>Agregá <b>Buscar muestras de salud</b>: tipo <b>Pasos</b>, fecha de inicio <b>es hoy</b>. Después <b>Calcular estadísticas → Suma</b> y <b>Redondear número</b>.</li>
-        <li>Repetí lo mismo con el tipo <b>Energía activa</b>.</li>
-        <li>Opcional: repetilo con <b>Minutos de ejercicio</b>, si aparece en la lista.</li>
-        <li>Agregá <b>Texto</b> con este formato y reemplazá cada valor por el resultado de su paso: <code>JSFOOD;pasos;kcal;minutos</code></li>
-        <li>Terminá con <b>Copiar al portapapeles</b>. Si querés, sumalo como widget o a la pantalla de inicio.</li>
-      </ol>
-      <p class="small muted">Atajos no da acceso directo a los entrenamientos, así que los entrenos se marcan en la pestaña Hoy.</p>
+    <div id="log-prev" class="logprev" hidden></div>
+    <p class="small muted" id="log-msg"></p>
+    <div id="log-res" hidden>
+      <div class="lbl">Resultado (podés corregirlo)</div>
+      <label class="fld"><span class="lbl">Nombre</span><input class="inp" id="log-n"></label>
+      <div class="wform4">
+        <label class="fld"><span class="lbl">Prote g</span><input class="inp mono" type="number" id="log-p" inputmode="decimal"></label>
+        <label class="fld"><span class="lbl">Carbos g</span><input class="inp mono" type="number" id="log-c" inputmode="decimal"></label>
+        <label class="fld"><span class="lbl">Grasa g</span><input class="inp mono" type="number" id="log-f" inputmode="decimal"></label>
+        <div class="fld"><span class="lbl">kcal</span><div class="kout mono" id="log-k">0</div></div>
+      </div>
+      <ul class="logitems" id="log-items"></ul>
+      <label class="chk"><input type="checkbox" id="log-sweet"> Fue un dulce o un gusto</label>
+    </div>
+    <details class="eq" id="log-manual"><summary>Cargar a mano o elegir alimentos comunes</summary>
+      <div class="commons" id="log-commons"></div>
     </details>
+    <div class="logbtns"><button class="btn ghost" id="log-del" hidden>Volver al plato del plan</button><button class="btn" id="log-save">Guardar</button></div>
+  </div>
+</div>
+
+<div class="ov" id="m-day" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="day-t">
+    <div class="sh"><h2 id="day-t">Día</h2><button class="x" data-close aria-label="Cerrar">✕</button></div>
+    <div id="day-body"></div>
   </div>
 </div>
 
