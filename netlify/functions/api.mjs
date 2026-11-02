@@ -85,6 +85,31 @@ async function estimate(text, image) {
   }
   return json({ error: "La IA no respondió" + (lastErr ? ` (${lastErr.slice(0, 80)})` : "") }, 502);
 }
+// Lectura de la última medición de farmacia: una sola llamada corta por medición (el resultado se guarda en la app).
+const COACH = `Sos un nutricionista deportivo. Te paso en JSON el resumen de una persona que está bajando grasa: su última medición de farmacia, la anterior si existe, su peso, su objetivo y cómo cumplió el plan en las 2 semanas previas.
+Escribí en español rioplatense (voseo), claro y directo, sin exagerar ni felicitar de más, sin hablar de premios ni recompensas. No inventes datos que no estén.
+Si el plan es "sirenas", respetá sus reglas: sin harinas, azúcares ni almidones; no sugieras sumar arroz, patata o pan.
+Respondé SOLO con JSON válido:
+{"estado":"una o dos frases sobre cómo viene, mencionando los números clave","reforzar":["..."],"mantener":["..."],"dejar":["..."]}
+Cada lista con 0 a 2 ítems de una frase corta y concreta. Si un dato no alcanza para opinar, decilo en "estado".`;
+async function coach(summary) {
+  const key = process.env.ANTHROPIC_API_KEY, base = (process.env.ANTHROPIC_BASE_URL || "https://api.anthropic.com").replace(/\/$/, "");
+  if (!key) return json({ error: "La IA no está activada en Netlify" }, 503);
+  for (const model of MODELS) {
+    const r = await fetch(`${base}/v1/messages`, {
+      method: "POST",
+      headers: { "content-type": "application/json", "x-api-key": key, "anthropic-version": "2023-06-01" },
+      body: JSON.stringify({ model, max_tokens: 450, system: COACH, messages: [{ role: "user", content: summary }] })
+    });
+    if (!r.ok) { if (r.status === 404 || r.status === 400) continue; return json({ error: "La IA no respondió" }, 502); }
+    const data = await r.json();
+    const j = parseJSON((data.content || []).filter(b => b.type === "text").map(b => b.text).join(""));
+    if (!j || !j.estado) return json({ error: "No entendí la respuesta de la IA" }, 502);
+    const list = v => (Array.isArray(v) ? v : []).slice(0, 2).map(x => String(x).slice(0, 160));
+    return json({ estado: String(j.estado).slice(0, 400), reforzar: list(j.reforzar), mantener: list(j.mantener), dejar: list(j.dejar) });
+  }
+  return json({ error: "La IA no respondió" }, 502);
+}
 const num = v => { const x = parseFloat(v); return isFinite(x) && x >= 0 ? Math.round(x * 10) / 10 : 0; };
 function parseJSON(t) { try { return JSON.parse(t); } catch (e) {} const m = t.match(/\{[\s\S]*\}/); if (!m) return null; try { return JSON.parse(m[0]); } catch (e) { return null; } }
 
@@ -137,6 +162,12 @@ export default async (req) => {
       if (!(await checkAuth(req, s))) return json({ error: "auth" }, 401);
       const { text, image } = await req.json();
       return await estimate(String(text || "").slice(0, 600), typeof image === "string" ? image : null);
+    }
+
+    if (route === "coach" && req.method === "POST") {
+      if (!(await checkAuth(req, s))) return json({ error: "auth" }, 401);
+      const { summary } = await req.json();
+      return await coach(JSON.stringify(summary || {}).slice(0, 3000));
     }
 
     return json({ error: "not found" }, 404);

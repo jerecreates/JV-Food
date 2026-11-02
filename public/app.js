@@ -709,6 +709,51 @@ $("#m-day").addEventListener("click", e => {
   const b = e.target.closest("[data-goday]"); if (!b) return;
   const d = pd(b.dataset.goday); weekStart = sunday(d); dayIdx = d.getDay(); closeM(); show("hoy");
 });
+
+/* ---------- Lectura de la última medición (IA, una vez por medición) ---------- */
+let coachBusy = {};
+function coachSummary(u) {
+  const cl = clog(u), last = cl[cl.length - 1], prev = cl.length > 1 ? cl[cl.length - 2] : null, cfg = U[u];
+  const days = [...Array(14)].map((_, i) => ds(addD(pd(last.d), -i))).map(d => ({ d, x: dayData(u, d) })).filter(o => o.x.any);
+  const fed = days.filter(o => o.x.md || o.x.logged), avg = f => fed.length ? Math.round(fed.reduce((s, o) => s + f(o.x), 0) / fed.length) : null;
+  const tr = days.filter(o => o.x.t.train);
+  return {
+    persona: cfg.name, plan: cfg.sirenas ? "sirenas (sin harinas, azúcares ni almidones)" : "déficit con almidón solo en la cena de entreno",
+    altura_cm: cfg.h, objetivo: cfg.goalTxt, proteina_objetivo_g: cfg.sirenas ? null : 145,
+    medicion: { fecha: last.d, peso: get(u, "peso", last.d) ?? +(last.fm + last.ffm).toFixed(1), grasa_pct: last.pct, grasa_kg: last.fm, sin_grasa_kg: last.ffm },
+    anterior: prev ? { fecha: prev.d, grasa_pct: prev.pct, grasa_kg: prev.fm, sin_grasa_kg: prev.ffm, dias_entre: Math.round((pd(last.d) - pd(prev.d)) / 864e5) } : null,
+    ultimas_2_semanas: days.length ? {
+      dias_con_registro: days.length, dias_con_comidas_marcadas: fed.length, kcal_prom: avg(x => x.tot.k), proteina_prom_g: avg(x => x.tot.p),
+      comidas_hechas_prom: +(days.reduce((s, o) => s + o.x.md, 0) / days.length).toFixed(1),
+      entrenos: `${tr.filter(o => o.x.ent).length} de ${tr.length}`, agua_l_prom: +(days.reduce((s, o) => s + o.x.vasos, 0) * 0.25 / days.length).toFixed(1),
+      dulces: days.filter(o => o.x.dulce).length, comidas_fuera_del_plan: days.reduce((s, o) => s + o.x.logged, 0)
+    } : "sin registros"
+  };
+}
+async function runCoach(u, d) {
+  if (coachBusy[u + d] || MODE !== "remote") return; coachBusy[u + d] = true;
+  try {
+    const r = await fetch("/api/coach", { method: "POST", headers: hdrs(), body: JSON.stringify({ summary: coachSummary(u) }) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.error || "No se pudo analizar");
+    put(u, "coach", d, j);
+  } catch (e) { coachBusy[u + d] = "err:" + e.message; }
+  if (view === "pro" && ME === u) { const el = $("#coach"); if (el) el.outerHTML = coachCard(u); }
+}
+function coachCard(u) {
+  const cl = clog(u);
+  if (!cl.length) return `<div class="card" id="coach"><h3>🧭 Cómo venís</h3><p class="small muted">Cuando cargues una medición de farmacia, acá vas a ver una lectura de cómo venís y qué conviene reforzar.</p></div>`;
+  const d = cl[cl.length - 1].d, c = get(u, "coach", d), busy = coachBusy[u + d];
+  if (!c) {
+    if (!busy && MODE === "remote") setTimeout(() => runCoach(u, d), 0);
+    const err = typeof busy === "string" ? busy.slice(4) : "";
+    return `<div class="card" id="coach"><h3>🧭 Cómo venís</h3><p class="small muted">${err ? `${esc(err)}.` : MODE === "remote" ? "Analizando tu medición del " + (+d.slice(8)) + " " + MES[+d.slice(5, 7) - 1] + "…" : "El análisis necesita el servidor."}</p>${err ? `<button class="pill" data-coach="1">Reintentar</button>` : ""}</div>`;
+  }
+  const sec = (t, ic, l) => l && l.length ? `<div class="cs"><div class="lbl">${ic} ${t}</div><ul>${l.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>` : "";
+  return `<div class="card" id="coach"><div class="wh"><h3>🧭 Cómo venís</h3><span class="lbl">medición · ${+d.slice(8)} ${MES[+d.slice(5, 7) - 1]}</span></div>
+    <p>${esc(c.estado)}</p>${sec("Reforzar", "⬆️", c.reforzar)}${sec("Mantener", "✅", c.mantener)}${sec("Dejar", "⬇️", c.dejar)}
+    <p class="small muted">Lectura orientativa hecha con IA a partir de tu medición y tus registros. Se actualiza sola cuando cargás una medición nueva.</p></div>`;
+}
 function renderPro() {
   const u = ME, cfg = U[u], log = wlog(u);
   const cur = log.length ? log[log.length - 1].kg : null, curD = log.length ? log[log.length - 1].d : TODS;
@@ -752,6 +797,7 @@ function renderPro() {
        <button type="submit" class="btn">Guardar</button>
      </form>
    </div>
+   ${coachCard(u)}
    ${histCard()}
    ${compCard(u)}
    <div class="card"><div class="wh"><h3>Peso vs. plan</h3><span class="lbl">hasta el 31 mar</span></div>${weightChart(u)}
@@ -791,6 +837,7 @@ $("#v-pro").addEventListener("submit", e => {
 $("#v-pro").addEventListener("click", e => {
   const b = e.target.closest("button, [data-hday]"); if (!b) return;
   if (b.dataset.del) { const d = b.dataset.del, kg = get(ME, "peso", d), c = get(ME, "comp", d); put(ME, "peso", d, null); put(ME, "comp", d, null); renderPro(); toast("Borraste el peso", () => { put(ME, "peso", d, kg); if (c) put(ME, "comp", d, c); renderPro(); }); }
+  else if (b.dataset.coach) { const cl = clog(ME), d = cl[cl.length - 1].d; delete coachBusy[ME + d]; runCoach(ME, d); const el = $("#coach"); if (el) el.querySelector("p").textContent = "Analizando…"; }
   else if (b.dataset.delc) { const d = b.dataset.delc, c = get(ME, "comp", d); put(ME, "comp", d, null); renderPro(); toast("Borraste la medición", () => { put(ME, "comp", d, c); renderPro(); }); }
   else if (b.dataset.hv) { hView = b.dataset.hv; renderHist(); }
   else if (b.dataset.hu) { hUser = b.dataset.hu; renderHist(); }
