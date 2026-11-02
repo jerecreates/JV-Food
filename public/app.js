@@ -158,18 +158,27 @@ async function flush() {
     if (C.pending.length) flush();
   } catch (e) { setSync(true); }
 }
+let pendingRender = false;
+// El usuario está escribiendo o tiene un formulario a medio cargar: no repintar
+function isEditing() {
+  const a = document.activeElement;
+  if (a && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName) && a.closest("section")) return true;
+  const f = $("#wform"); return !!(f && ([...f.querySelectorAll("input:not([type=date])")].some(i => i.value) || f.querySelector("details[open]")));
+}
+document.addEventListener("focusout", () => setTimeout(() => { if (pendingRender && !isEditing() && $("#m-log").hidden && $("#m-day").hidden) { pendingRender = false; render(); } }, 300));
 async function pull() {
   if (MODE !== "remote") return;
   try {
     const r = await fetch("/api/state", { headers: hdrs() });
     if (r.status === 401) return logout();
     if (!r.ok) throw new Error(r.status);
-    const data = await r.json();
+    const data = await r.json(), before = JSON.stringify(C.docs);
     C.docs = { jere: data.jere || {}, vale: data.vale || {}, shared: data.shared || {} };
     for (const op of C.pending) { const d = doc(op.doc); d[op.key] ||= {}; if (op.val === null) delete d[op.key][op.sub]; else d[op.key][op.sub] = op.val; }
-    saveC(); setSync(false);
-    if (!$("#m-log").hidden || !$("#m-day").hidden) return; // no repintar con un modal abierto
-    render(); flush();
+    saveC(); setSync(false); flush();
+    if (JSON.stringify(C.docs) === before) return; // nada cambió: no repintar
+    if (!$("#m-log").hidden || !$("#m-day").hidden || isEditing()) { pendingRender = true; return; }
+    render();
   } catch (e) { setSync(true); }
 }
 function setSync(err) { const el = $("#sync"); if (el) el.textContent = err ? "● sin conexión" : ""; }
@@ -710,7 +719,8 @@ function renderPro() {
   if (recent.length >= 2) { const days = (pd(recent[recent.length - 1].d) - pd(recent[0].d)) / 86400000; if (days >= 7) pace = (recent[0].kg - recent[recent.length - 1].kg) / (days / 7); }
   const planPace = (cfg.start - cfg.goal) / ((END - new Date(2026, 9, 27)) / 604800000);
   const usePace = pace && pace > 0.2 ? pace : planPace, eta = addD(TODAY, Math.ceil(left / usePace * 7));
-  const fNow = fatAt(u, cur ?? cfg.start, curD);
+  const fNow = fatAt(u, cur ?? cfg.start, curD), cl = clog(u), lastC = cl.length ? cl[cl.length - 1] : null;
+  const fdate = d => `${+d.slice(8)} ${MES[+d.slice(5, 7) - 1]}`;
   const third = fNow
     ? `<div class="kpi"><div class="v">${fNow.m ? "" : "~"}${nf(fNow.v, 1)} %</div><div class="k">grasa ${fNow.m ? "medida" : "estimada"}</div></div>`
     : `<div class="kpi"><div class="v">${nf(imc(u, cur ?? cfg.start), 1)}</div><div class="k">IMC (meta ${nf(imc(u, cfg.goal), 1)})</div></div>`;
@@ -719,22 +729,24 @@ function renderPro() {
   const hist = [...log].reverse().map(e => { const f = fatAt(u, e.kg, e.d); return `<tr><td class="mono">${e.d.slice(8)}/${e.d.slice(5, 7)}</td><td class="r mono">${nf(e.kg, 1)}</td><td class="r mono">${f ? (f.m ? `<b>${nf(f.v, 1)} %</b>` : `<span class="muted">~${nf(f.v, 1)} %</span>`) : nf(imc(u, e.kg), 1)}</td><td class="r"><button class="del" data-del="${e.d}" aria-label="Borrar">×</button></td></tr>`; }).join("");
   $("#v-pro").innerHTML = `
    <div class="card"><div class="hero">
-     <div class="ring">${ring(pct, "var(--accent)", 132, 12)}<div class="ctr"><span class="big">${cur !== null ? nf(cur, 1) : "—"}</span><span class="of">kg hoy</span><span class="mono" style="font-size:12px;color:var(--accent);margin-top:4px">${Math.round(pct * 100)} %</span></div></div>
+     <div class="ring">${ring(pct, "var(--accent)", 132, 12)}<div class="ctr"><span class="big">${cur !== null ? nf(cur, 1) : "—"}</span><span class="of">kg actuales</span></div></div>
      <div class="kpis">
        <div class="kpi"><div class="v">${cur !== null ? nf(lost, 1) : "—"}</div><div class="k">kg bajados</div></div>
        <div class="kpi"><div class="v">${nf(left, 1)}</div><div class="k">kg para la meta</div></div>
-       ${third}
-       <div class="kpi"><div class="v">${pace !== null ? nf(pace, 1) : "—"}</div><div class="k">kg por semana</div></div>
+       ${lastC ? `<div class="kpi"><div class="v">${nf(lastC.pct, 1)} %</div><div class="k">grasa · ${fdate(lastC.d)}</div></div>
+       <div class="kpi"><div class="v">${nf(lastC.ffm, 1)}</div><div class="k">kg sin grasa · ${fdate(lastC.d)}</div></div>`
+       : `${third}<div class="kpi"><div class="v">${pace !== null ? nf(pace, 1) : "—"}</div><div class="k">kg por semana</div></div>`}
      </div></div>
+     ${cur !== null ? `<p class="small muted">Último peso: ${fdate(curD)}${pace !== null ? ` · ritmo ${nf(pace, 1)} kg por semana` : ""}</p>` : ""}
      <p class="note">${cur === null ? `Cargá tu primer peso para arrancar. Meta: ${cfg.goalTxt}.` : left === 0 ? "¡Llegaste a la meta!" : `Al ritmo ${pace && pace > 0.2 ? "actual" : "del plan"} llegás a ${nf(cfg.goal, cfg.goal % 1 ? 1 : 0)} kg hacia el <b>${eta.getDate()} de ${MES[eta.getMonth()]}${eta.getFullYear() > 2027 ? " de " + eta.getFullYear() : ""}</b>.${goal20}`}</p>
      <form id="wform" class="wform">
        <label class="fld"><span class="lbl">Fecha</span><input type="date" id="w-date" class="inp" value="${TODS}"></label>
-       <label class="fld"><span class="lbl">Peso (kg)</span><input type="number" id="w-kg" class="inp mono" step="0.1" min="35" max="180" inputmode="decimal" placeholder="${nf(cur ?? cfg.start, 1)}"></label>
+       <label class="fld"><span class="lbl">Peso (kg)</span><input type="text" id="w-kg" class="inp mono" inputmode="decimal" autocomplete="off" placeholder="${nf(cur ?? cfg.start, 1)}"></label>
        <details class="farm"><summary>＋ Datos de la farmacia (opcional)</summary>
          <div class="wform3">
-           <label class="fld"><span class="lbl">% grasa</span><input type="number" id="w-pct" class="inp mono" step="0.1" inputmode="decimal" placeholder="%"></label>
-           <label class="fld"><span class="lbl">Masa grasa</span><input type="number" id="w-fm" class="inp mono" step="0.1" inputmode="decimal" placeholder="kg"></label>
-           <label class="fld"><span class="lbl">Sin grasa</span><input type="number" id="w-ffm" class="inp mono" step="0.1" inputmode="decimal" placeholder="kg"></label>
+           <label class="fld"><span class="lbl">% grasa</span><input type="text" id="w-pct" class="inp mono" inputmode="decimal" autocomplete="off" placeholder="%"></label>
+           <label class="fld"><span class="lbl">Masa grasa</span><input type="text" id="w-fm" class="inp mono" inputmode="decimal" autocomplete="off" placeholder="kg"></label>
+           <label class="fld"><span class="lbl">Sin grasa</span><input type="text" id="w-ffm" class="inp mono" inputmode="decimal" autocomplete="off" placeholder="kg"></label>
          </div>
          <p class="small muted">Con uno de los tres alcanza: la app calcula los otros a partir del peso.</p></details>
        <button type="submit" class="btn">Guardar</button>
@@ -918,7 +930,7 @@ function openM(id) {
   if (id === "m-user") $("#user-info").textContent = `Entraste como ${U[ME].name}${MODE === "local" ? " (modo local: los datos quedan solo en este dispositivo)" : ""}.`;
   m.querySelector(".x").focus();
 }
-function closeM() { document.querySelectorAll(".ov").forEach(o => o.hidden = true); if (lastFocus && document.body.contains(lastFocus)) lastFocus.focus(); }
+function closeM() { document.querySelectorAll(".ov").forEach(o => o.hidden = true); if (lastFocus && document.body.contains(lastFocus)) lastFocus.focus(); if (pendingRender && !isEditing()) { pendingRender = false; render(); } }
 document.querySelectorAll(".ov").forEach(o => o.addEventListener("click", e => { if (e.target === o || e.target.closest("[data-close]")) closeM(); }));
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeM(); });
 $("#btn-rules").addEventListener("click", () => openM("m-rules"));
